@@ -14,7 +14,7 @@ const NewsCard = ({ title, excerpt, imageUrl, date, variant = "default" }: NewsC
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <Card className={`news-card overflow-hidden bg-white ${variant === "compact" ? "h-full" : ""}`}>
+    <Card className={`news-card overflow-hidden bg-[#fff8ec] ${variant === "compact" ? "h-full" : ""}`}>
       <div className={`${variant === "compact" ? "aspect-[16/10]" : "aspect-video"} relative overflow-hidden`}>
         <div className={`absolute inset-0 bg-slate-200 ${imageLoaded ? "hidden" : "block"}`} />
         <img
