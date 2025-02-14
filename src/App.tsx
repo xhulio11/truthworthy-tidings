@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import Article from "./pages/Article";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
+          <Route path="/article/:id" element={<Article />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

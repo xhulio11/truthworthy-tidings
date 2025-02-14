@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import NewsCard from "./NewsCard";
 import { useInView } from "react-intersection-observer";
+import { Link } from "react-router-dom";
 
 // Mock data - replace with actual API calls
 const getMockNews = (page: number) => {
@@ -45,14 +46,18 @@ const NewsFeed = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {news.map((article) => (
-          <div key={article.id} className="fade-in">
+          <Link
+            key={article.id}
+            to={`/article/${article.id}`}
+            className="fade-in transition-transform hover:translate-y-[-2px]"
+          >
             <NewsCard
               title={article.title}
               excerpt={article.excerpt}
               imageUrl={article.imageUrl}
               date={article.date}
             />
-          </div>
+          </Link>
         ))}
       </div>
       <div ref={ref} className="h-10" />
