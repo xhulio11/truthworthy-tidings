@@ -1,6 +1,6 @@
 
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight, Home } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect } from "react";
 import NewsCard from "@/components/NewsCard";
 import { useInView } from "react-intersection-observer";
@@ -72,30 +72,24 @@ const Article = () => {
     <div className="min-h-screen bg-[#f5dfab] pt-24">
       <div className="container mx-auto px-4">
         {/* Navigation Controls */}
-        <div className="flex justify-between items-center mb-6 gap-4">
+        <div className="flex gap-2 mb-6">
           <Button
             variant="outline"
+            size="icon"
             className="bg-white/80"
             onClick={() => navigate(`/article/${numericId - 1}`)}
             disabled={numericId <= 1}
           >
-            <ChevronLeft className="mr-2" /> Previous
+            <ChevronLeft />
           </Button>
           
           <Button
             variant="outline"
-            className="bg-white/80"
-            onClick={() => navigate("/")}
-          >
-            <Home className="mr-2" /> Home
-          </Button>
-          
-          <Button
-            variant="outline"
+            size="icon"
             className="bg-white/80"
             onClick={() => navigate(`/article/${numericId + 1}`)}
           >
-            Next <ChevronRight className="ml-2" />
+            <ChevronRight />
           </Button>
         </div>
 
