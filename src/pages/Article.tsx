@@ -18,11 +18,11 @@ const getArticleData = (id: string) => ({
 
 // Mock function to get related articles with pagination
 const getRelatedArticles = (currentId: string, page: number) => 
-  Array.from({ length: 3 }, (_, i) => ({
-    id: `${parseInt(currentId) + i + 1 + (page * 3)}`,
-    title: `Related Article ${i + 1 + (page * 3)}`,
+  Array.from({ length: 4 }, (_, i) => ({
+    id: `${parseInt(currentId) + i + 1 + (page * 4)}`,
+    title: `Related Article ${i + 1 + (page * 4)}`,
     excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    imageUrl: `https://picsum.photos/seed/${parseInt(currentId) + i + 1 + (page * 3)}/800/400`,
+    imageUrl: `https://picsum.photos/seed/${parseInt(currentId) + i + 1 + (page * 4)}/800/400`,
     date: new Date(Date.now() - Math.random() * 10000000000).toLocaleDateString(),
   }));
 
@@ -68,6 +68,15 @@ const Article = () => {
     }
   }, [inView]);
 
+  // Navigate to next article (first related article)
+  const handleNextArticle = () => {
+    if (relatedArticles.length > 0) {
+      navigate(`/article/${relatedArticles[0].id}`);
+    } else {
+      navigate(`/article/${numericId + 1}`);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f5dfab] pt-24">
       <div className="container mx-auto px-4">
@@ -87,7 +96,7 @@ const Article = () => {
             variant="outline"
             size="icon"
             className="bg-white/80"
-            onClick={() => navigate(`/article/${numericId + 1}`)}
+            onClick={handleNextArticle}
           >
             <ChevronRight />
           </Button>
@@ -117,32 +126,34 @@ const Article = () => {
           </div>
 
           {/* Related Articles Sidebar */}
-          <div className="lg:col-span-1">
-            <h2 className="text-xl font-semibold text-slate-900 mb-4">
-              Related Articles
-            </h2>
-            <div className="space-y-4">
-              {relatedArticles.map((article) => (
-                <Link 
-                  key={article.id}
-                  to={`/article/${article.id}`}
-                  className="block transition-transform hover:translate-y-[-2px]"
-                >
-                  <NewsCard
-                    title={article.title}
-                    excerpt={article.excerpt}
-                    imageUrl={article.imageUrl}
-                    date={article.date}
-                    variant="compact"
-                  />
-                </Link>
-              ))}
-              <div ref={ref} className="h-10" />
-              {loading && (
-                <div className="flex justify-center py-4">
-                  <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-600 rounded-full animate-spin" />
-                </div>
-              )}
+          <div className="lg:col-span-1 relative">
+            <div className="sticky top-24">
+              <h2 className="text-xl font-semibold text-slate-900 mb-4">
+                Related Articles
+              </h2>
+              <div className="space-y-4 max-h-[calc(100vh-160px)] overflow-y-auto pr-2 hide-scrollbar">
+                {relatedArticles.map((article) => (
+                  <Link 
+                    key={article.id}
+                    to={`/article/${article.id}`}
+                    className="block transition-transform hover:translate-y-[-2px]"
+                  >
+                    <NewsCard
+                      title={article.title}
+                      excerpt={article.excerpt}
+                      imageUrl={article.imageUrl}
+                      date={article.date}
+                      variant="compact"
+                    />
+                  </Link>
+                ))}
+                <div ref={ref} className="h-10" />
+                {loading && (
+                  <div className="flex justify-center py-4">
+                    <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-600 rounded-full animate-spin" />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
