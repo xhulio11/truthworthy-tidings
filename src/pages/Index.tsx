@@ -1,12 +1,22 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import NewsFeed from "@/components/NewsFeed";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-slate-50">
+      <div className="pt-24 pb-12 bg-white border-b border-slate-200">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-5xl font-bold text-slate-900 mb-4">
+              Balanced News
+            </h1>
+            <p className="text-xl text-slate-600">
+              Your trusted source for unbiased news coverage
+            </p>
+          </div>
+        </div>
       </div>
+      <NewsFeed />
     </div>
   );
 };
